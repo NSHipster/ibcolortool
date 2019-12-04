@@ -12,6 +12,26 @@ UIColor(named: "Living Coral")
 UIColor.groupTableViewBackgroundColor
 ```
 
+## Installation
+
+### Homebrew
+
+Run the following command to install using [homebrew](https://brew.sh/):
+
+```terminal
+$ brew install nshipster/formulae/ibcolortool
+```
+
+### Manually
+
+Run the following commands to build and install manually:
+
+```terminal
+$ git clone https://github.com/NSHipster/ibcolortool.git
+$ cd ibcolortool
+$ make install
+```
+
 ## License
 
 MIT
