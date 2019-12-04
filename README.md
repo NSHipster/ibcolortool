@@ -12,6 +12,11 @@ UIColor(named: "Living Coral")
 UIColor.groupTableViewBackgroundColor
 ```
 
+## Requirements
+
+- Xcode 11+
+- Swift 5.1+
+
 ## Installation
 
 ### Homebrew
