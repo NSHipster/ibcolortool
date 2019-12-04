@@ -4,8 +4,6 @@ import IBDecodable
 
 let arguments = Array(ProcessInfo.processInfo.arguments.dropFirst())
 
-// print(arguments)
-
 let fileManager = FileManager.default
 
 var standardOutput = FileHandle.standardOutput
