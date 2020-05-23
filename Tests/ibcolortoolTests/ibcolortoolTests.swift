@@ -35,10 +35,6 @@ final class IBColorToolTests: XCTestCase {
             return Bundle.main.bundleURL
         #endif
     }
-
-    static var allTests = [
-        ("testIBColorTool", testIBColorTool),
-    ]
 }
 
 fileprivate func temporaryXIBFile() throws -> URL {
