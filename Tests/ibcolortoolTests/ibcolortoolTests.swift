@@ -68,7 +68,7 @@ fileprivate func temporaryXIBFile() throws -> URL {
     """#
 
     let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-    let temporaryFilename = ProcessInfo().globallyUniqueString
+    let temporaryFilename = UUID().uuidString
 
     let temporaryFileURL = temporaryDirectoryURL.appendingPathComponent(temporaryFilename).appendingPathExtension("xib")
     try xib.data(using: .utf8)?.write(to: temporaryFileURL, options: .atomic)
