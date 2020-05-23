@@ -1,11 +1,11 @@
+import ArgumentParser
 import Foundation
 import IBDecodable
-import Commander
 
 extension Color {
-    enum Format {
-        case rgbHexadecimal
-        case uicolorDeclaration
+    enum Format: String, ExpressibleByArgument {
+        case rgbHexadecimal = "hex"
+        case uicolorDeclaration = "uicolor"
 
         func representation(of color: Color) -> String? {
             switch self {
@@ -30,28 +30,6 @@ extension Color {
                     return "UIColor.\(components.name)"
                 }
             }
-        }
-    }
-}
-
-// MARK: - ArgumentConvertible
-
-extension Color.Format: ArgumentConvertible {
-    var description: String {
-        switch self {
-        case .rgbHexadecimal:
-            return "hex"
-        case .uicolorDeclaration:
-            return "uicolor"
-        }
-    }
-
-    init(parser: ArgumentParser) throws {
-        switch parser.shift() {
-        case "hex":
-            self = .rgbHexadecimal
-        default:
-            self = .uicolorDeclaration
         }
     }
 }
