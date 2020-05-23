@@ -1,7 +1,1 @@
-import XCTest
-
-import ibcolortoolTests
-
-var tests = [XCTestCaseEntry]()
-tests += ibcolortoolTests.allTests()
-XCTMain(tests)
+fatalError("Run with `swift test --enable-test-discovery`")

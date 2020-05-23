@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/IBDecodable/IBDecodable.git",
         "state": {
           "branch": null,
-          "revision": "d290038df73db68678a1eca1d8cbd3237750113d",
-          "version": "0.0.4"
+          "revision": "804c5f3dcf290c019b25e0ce2e1044d3a02c185a",
+          "version": "0.4.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
         "state": {
           "branch": null,
-          "revision": "f43166a8e18fdd0857f29e303b1bb79a5428bca0",
-          "version": "4.9.0"
+          "revision": "a4931e5c3bafbedeb1601d3bb76bbe835c6d475a",
+          "version": "5.0.1"
         }
       }
     ]
