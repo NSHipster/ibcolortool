@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "ibcolortool",
+    platforms: [
+        .macOS("10.13")
+    ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/IBDecodable/IBDecodable.git", from: "0.4.0"),
