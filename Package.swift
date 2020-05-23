@@ -7,7 +7,7 @@ let package = Package(
     name: "ibcolortool",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/IBDecodable/IBDecodable.git", from: "0.0.4"),
+        .package(url: "https://github.com/IBDecodable/IBDecodable.git", from: "0.4.0"),
         .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMinor(from: "0.0.6")),
     ],
     targets: [
