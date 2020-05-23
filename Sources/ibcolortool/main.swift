@@ -16,8 +16,9 @@ struct IBColorTool: ParsableCommand {
         version: "0.0.1"
     )
 
-    @Argument(help: "One or more paths to XIB or Storyboard files")
-    var paths: [String]
+    @Argument(help: "One or more paths to XIB or Storyboard files",
+              transform: { URL(fileURLWithPath: $0) })
+    var inputs: [URL]
 
     @Option(default: .uicolorDeclaration,
             help: "Representation format for colors.")
@@ -26,15 +27,12 @@ struct IBColorTool: ParsableCommand {
     func run() throws {
         var colors: [IBDecodable.Color] = []
 
-        guard !paths.isEmpty else {
+        guard !inputs.isEmpty else {
             print(IBColorTool.helpMessage())
             return
         }
 
-        for path in paths {
-            guard fileManager.fileExists(atPath: path) else { continue }
-            let fileURL = URL(fileURLWithPath: path)
-
+        for fileURL in inputs {
             do {
                 switch fileURL.pathExtension.lowercased() {
                 case "storyboard":
@@ -47,7 +45,7 @@ struct IBColorTool: ParsableCommand {
                     print("Unknown file extension: ", fileURL.pathExtension, to: &standardError)
                 }
             } catch {
-                print(path, error, to: &standardError)
+                print(fileURL, error, to: &standardError)
                 continue
             }
         }
