@@ -14,7 +14,7 @@ final class IBColorToolTests: XCTestCase {
         let pipe = Pipe()
         process.standardOutput = pipe
 
-        process.arguments = [(try temporaryXIBFile()).absoluteString]
+        process.arguments = [(try temporaryXIBFile()).path]
 
         try process.run()
         process.waitUntilExit()
@@ -22,7 +22,7 @@ final class IBColorToolTests: XCTestCase {
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: data, encoding: .utf8)
 
-        XCTAssertEqual(output, "UIColor(red: 1.0, green: 0.5763723, blue: 0.0, alpha: 1.0)")
+        XCTAssertEqual(output, "UIColor(red: 1.0, green: 0.5763723, blue: 0.0, alpha: 1.0)\n")
     }
 
     private var productsDirectory: URL {
@@ -64,6 +64,7 @@ fileprivate func temporaryXIBFile() throws -> URL {
             </view>
         </objects>
     </document>
+
     """#
 
     let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
