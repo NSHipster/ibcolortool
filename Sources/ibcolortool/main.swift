@@ -24,8 +24,11 @@ struct IBColorTool: ParsableCommand {
             help: "Representation format for colors.")
     var format: Color.Format
 
+    @Flag(help: "Include the color's corresponding Object ID")
+    var includeObjectID: Bool
+
     func run() throws {
-        var colors: [IBDecodable.Color] = []
+        var entries: [Entry] = []
 
         guard !inputs.isEmpty else {
             print(IBColorTool.helpMessage())
@@ -37,10 +40,10 @@ struct IBColorTool: ParsableCommand {
                 switch fileURL.pathExtension.lowercased() {
                 case "storyboard":
                     let file = try StoryboardFile(url: fileURL)
-                    colors.append(contentsOf: file.colors)
+                    entries.append(contentsOf: file.entries)
                 case "xib":
                     let file = try XibFile(url: fileURL)
-                    colors.append(contentsOf: file.colors)
+                    entries.append(contentsOf: file.entries)
                 default:
                     print("Unknown file extension: ", fileURL.pathExtension, to: &standardError)
                 }
@@ -50,7 +53,20 @@ struct IBColorTool: ParsableCommand {
             }
         }
 
-        print(colors.compactMap { format.representation(of: $0) }.joined(separator: "\n"), to: &standardOutput)
+        let lines: [String] = entries.compactMap { entry in
+            let id = entry.element?.id
+            let representation = format.representation(of: entry.color)
+
+            guard id != nil || representation != nil else { return nil }
+
+            if includeObjectID {
+                return "\(id ?? "")\t\(representation ?? "")"
+            } else {
+                return representation ?? ""
+            }
+        }
+
+        print(lines.joined(separator: "\n"), to: &standardOutput)
     }
 }
 

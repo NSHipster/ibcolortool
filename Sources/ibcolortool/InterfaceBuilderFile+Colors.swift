@@ -1,12 +1,14 @@
 import IBDecodable
 
+typealias Entry = (element: IBIdentifiable?, color: Color)
+
 fileprivate final class InterfaceBuilderElementVisitor {
-    var colors: [Color] = []
+    var entries: [Entry] = []
 
     func visit(element: IBElement) -> Bool {
         for child in Mirror(reflecting: element).children {
             if let color = child.value as? Color {
-                colors.append(color)
+                entries.append((element as? IBIdentifiable, color))
             }
         }
 
@@ -15,17 +17,17 @@ fileprivate final class InterfaceBuilderElementVisitor {
 }
 
 extension StoryboardFile {
-    var colors: [Color] {
+    var entries: [Entry] {
         let visitor = InterfaceBuilderElementVisitor()
         _ = document.browse(visitor.visit(element:))
-        return visitor.colors
+        return visitor.entries
     }
 }
 
 extension XibFile {
-    var colors: [Color] {
+    var entries: [Entry] {
         let visitor = InterfaceBuilderElementVisitor()
         _ = document.browse(visitor.visit(element:))
-        return visitor.colors
+        return visitor.entries
     }
 }
